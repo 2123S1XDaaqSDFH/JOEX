@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOEX | International Digital Architecture & Private Consulting</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@100;200;300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #c5a059;
+            --gold-light: #e3c186;
+            --dark: #050505;
+            --dark-soft: #0a0a0a;
+            --cream: #f4f4f4;
+            --transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        * { cursor: none !important; margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--dark);
+            color: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .luxury-font { 
+            font-family: 'Cinzel', serif; 
+            letter-spacing: 0.2em; 
+            text-transform: uppercase;
+        }
+
+        /* --- LOADER CINEMÁTICO --- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease;
+        }
+        .loader-brand { font-size: 3rem; margin-bottom: 2rem; }
+        .loader-track { width: 300px; height: 1px; background: rgba(197, 160, 89, 0.1); position: relative; }
+        .loader-bar { position: absolute; left: 0; top: 0; height: 100%; background: var(--gold); width: 0%; }
+
+        /* --- CURSOR PERSONALIZADO --- */
+        #cursor {
+            width: 10px; height: 10px; background: var(--gold);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 10000; mix-blend-mode: difference;
+        }
+        #cursor-follower {
+            width: 50px; height: 50px; border: 0.5px solid var(--gold);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transition: transform 0.2s ease-out;
+        }
+
+        /* --- ESTÉTICA GENERAL --- */
+        .text-gold {
+            background: linear-gradient(135deg, #c5a059 0%, #f9f295 50%, #c5a059 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+
+        .section-p { padding: 180px 0; }
+
+        /* --- COMPONENTES DE LUJO --- */
+        .btn-luxury {
+            border: 1px solid var(--gold);
+            padding: 20px 50px;
+            font-size: 10px;
+            letter-spacing: 0.5em;
+            color: var(--gold);
+            background: transparent;
+            transition: var(--transition);
+            display: inline-block;
+            position: relative;
+        }
+        .btn-luxury:hover { background: var(--gold); color: #000; box-shadow: 0 0 30px rgba(197, 160, 89, 0.3); }
+
+        .card-service {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(197, 160, 89, 0.05);
+            padding: 80px 60px;
+            transition: var(--transition);
+        }
+        .card-service:hover {
+            background: rgba(197, 160, 89, 0.03);
+            border-color: var(--gold);
+            transform: translateY(-20px);
+        }
+
+        /* --- ANIMACIONES DE TEXTO --- */
+        .reveal { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transition: clip-path 1.5s ease; }
+        .reveal.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+        /* --- SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-brand text-gold luxury-font">JOEX</div>
+        <div class="loader-track"><div class="loader-bar" id="load-bar"></div></div>
+        <div class="mt-8 text-[10px] tracking-[1em] uppercase opacity-40 font-light">
+            Authorized Personnel Only
+        </div>
+    </div>
+
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="fixed w-full z-[500] py-10 px-16 transition-all duration-700" id="navbar">
+        <div class="max-w-[1800px] mx-auto flex justify-between items-center">
+            <div class="text-4xl font-black text-gold luxury-font tracking-[0.3em]">JOEX</div>
+            
+            <div class="hidden lg:flex space-x-20 items-center">
+                <div class="flex space-x-12 uppercase text-[9px] tracking-[0.5em] font-light text-gray-400">
+                    <a href="#firma" class="hover:text-gold transition">La Firma</a>
+                    <a href="#activos" class="hover:text-gold transition">Activos Digitales</a>
+                    <a href="#legado" class="hover:text-gold transition">Legado</a>
+                </div>
+                <a href="https://wa.me/573184499437" class="btn-luxury">Concierge Privado</a>
+            </div>
+
+            <div class="lg:hidden text-gold text-2xl">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex flex-col justify-center items-center relative text-center px-6">
+        <div class="z-10 mt-20">
+            <p class="text-[10px] uppercase tracking-[1em] text-gold mb-16 opacity-0 translate-y-10" id="hero-tag">
+                ESTABLISHED IN MEDELLÍN • SERVING THE GLOBAL ELITE
+            </p>
+            <h1 class="text-7xl md:text-[8vw] font-black leading-[1] mb-16 opacity-0" id="hero-main">
+                INGENIERÍA DE <br> <span class="text-gold">PRESTIGIO DIGITAL</span>
+            </h1>
+            <div class="h-[1px] w-32 bg-gold mx-auto mb-16"></div>
+            <p class="text-gray-400 text-xl md:text-2xl max-w-4xl mx-auto mb-20 font-light leading-relaxed tracking-wider opacity-0" id="hero-desc">
+                En JOEX, entendemos que su presencia digital no es una opción, es su legado. Curamos arquitecturas exclusivas para quienes exigen nada menos que la perfección absoluta.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-12 opacity-0" id="hero-btns">
+                <a href="#activos" class="btn-luxury">Explorar Servicios</a>
+                <a href="https://wa.me/573184499437" class="text-[10px] uppercase tracking-[0.6em] flex items-center gap-6 group hover:text-gold transition">
+                    Agendar Consultoría <i class="fa-solid fa-arrow-right-long group-hover:translate-x-4 transition"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="firma" class="section-p container mx-auto px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+            <div class="relative">
+                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-[0.02] luxury-font select-none">JOEX</div>
+                <h2 class="text-6xl font-bold luxury-font mb-12 reveal">Nuestra <br><span class="text-gold">Misión Privada</span></h2>
+                <p class="text-gray-400 text-xl font-light leading-loose mb-12">
+                    Operamos bajo un estricto código de discreción y excelencia. Durante años, hemos sido el socio silencioso detrás de las corporaciones más influyentes, transformando visiones complejas en activos digitales de alto rendimiento.
+                </p>
+                <div class="grid grid-cols-2 gap-12">
+                    <div>
+                        <h4 class="text-gold text-lg mb-4">Visión</h4>
+                        <p class="text-sm text-gray-500 tracking-wider">Liderar la transición de las marcas de lujo hacia la inmortalidad digital.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-gold text-lg mb-4">Valores</h4>
+                        <p class="text-sm text-gray-500 tracking-wider">Precisión técnica, estética atemporal y resultados innegables.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
+                <div class="absolute inset-0 border border-gold/20 translate-x-6 translate-y-6 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-1000"></div>
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070" alt="Estructura de Lujo" class="relative z-10 grayscale hover:grayscale-0 transition duration-1000">
+            </div>
+        </div>
+    </section>
+
+    <section id="activos" class="section-p bg-[#030303]">
+        <div class="container mx-auto px-12">
+            <div class="text-center mb-40">
+                <h2 class="text-5xl md:text-7xl font-bold luxury-font mb-8">Soluciones de <span class="text-gold">Soberanía</span></h2>
+                <p class="text-gray-500 uppercase tracking-[0.5em] text-xs">Curaduría de servicios exclusivos</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+                <div class="card-service">
+                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">01 / ARCHITECTURE</span>
+                    <h3 class="text-2xl font-bold mb-8">Estructuras Corporativas</h3>
+                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Desarrollo de ecosistemas web robustos, diseñados para soportar el crecimiento global y la alta demanda transaccional.</p>
+                    <ul class="text-[10px] space-y-4 tracking-[0.3em] uppercase opacity-40">
+                        <li>• Scalable Backend Architecture</li>
+                        <li>• Enterprise Security Layers</li>
+                        <li>• Global CDN Integration</li>
+                    </ul>
+                </div>
+                <div class="card-service border-x-0 md:border-x-[1px] md:border-white/5">
+                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">02 / INTERFACE</span>
+                    <h3 class="text-2xl font-bold mb-8">Experiencias UI/UX de Élite</h3>
+                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Diseñamos interfaces que respiran lujo. Cada transición y cada píxel están calculados para evocar prestigio.</p>
+                    <ul class="text-[10px] space-y-4 tracking-[0.3em] uppercase opacity-40">
+                        <li>• Sensory Interaction Design</li>
+                        <li>• Custom Typography</li>
+                        <li>• Micro-motion Engineering</li>
+                    </ul>
+                </div>
+                <div class="card-service">
+                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">03 / INTELLIGENCE</span>
+                    <h3 class="text-2xl font-bold mb-8">Estrategia de Mercado</h3>
+                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Optimización de activos para dominar los motores de búsqueda y captar el segmento de mayor poder adquisitivo.</p>
+                    <ul class="text-[10px] space-y-4 tracking-[0.3em] uppercase opacity-40">
+                        <li>• Advanced SEO Consulting</li>
+                        <li>• Conversion Psychology</li>
+                        <li>• Data Intelligence</li>
+                    </ul>
+                </div>
+                <div class="card-service border-t-[1px] border-white/5">
+                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">04 / COMMERCE</span>
+                    <h3 class="text-2xl font-bold mb-8">E-Commerce de Alta Gama</h3>
+                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Tiendas online que funcionan como una boutique en la Quinta Avenida. Rapidez y exclusividad total.</p>
+                </div>
+                <div class="card-service border-t-[1px] border-x-0 md:border-x-[1px] border-white/5 bg-white/[0.01]">
+                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">05 / PRIVACY</span>
+                    <h3 class="text-2xl font-bold mb-8">Protección de Datos</h3>
+                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Seguridad de nivel bancario para proteger la integridad de su información y la de sus clientes más exclusivos.</p>
+                </div>
+                <div class="card-service border-t-[1px] border-white/5">
+                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">06 / MAINTENANCE</span>
+                    <h3 class="text-2xl font-bold mb-8">Soporte Concierge 24/7</h3>
+                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Un equipo de ingeniería dedicado exclusivamente a la preservación y actualización de su activo digital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="legado" class="section-p bg-black">
+        <div class="container mx-auto px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-20">
+                <div class="text-center lg:text-left">
+                    <p class="text-6xl font-bold text-gold luxury-font mb-4">14</p>
+                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Años de Trayectoria</p>
+                </div>
+                <div class="text-center lg:text-left">
+                    <p class="text-6xl font-bold text-gold luxury-font mb-4">500+</p>
+                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Activos Implementados</p>
+                </div>
+                <div class="text-center lg:text-left">
+                    <p class="text-6xl font-bold text-gold luxury-font mb-4">100%</p>
+                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Confidencialidad</p>
+                </div>
+                <div class="text-center lg:text-left">
+                    <p class="text-6xl font-bold text-gold luxury-font mb-4">Elite</p>
+                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Círculo de Clientes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-p container mx-auto px-12 max-w-4xl">
+        <h2 class="text-4xl font-bold luxury-font text-center mb-24">Preguntas de <span class="text-gold">Consultoría</span></h2>
+        <div class="space-y-12">
+            <div class="border-b border-white/10 pb-10">
+                <h4 class="text-gold text-sm mb-6 tracking-widest">¿Cómo garantizan la exclusividad de mi diseño?</h4>
+                <p class="text-gray-500 font-light">Cada proyecto en JOEX nace de una hoja en blanco. No utilizamos plantillas ni estructuras pre-fabricadas. Su activo digital será único en el mercado global.</p>
+            </div>
+            <div class="border-b border-white/10 pb-10">
+                <h4 class="text-gold text-sm mb-6 tracking-widest">¿Cuál es el tiempo de ejecución para una arquitectura corporativa?</h4>
+                <p class="text-gray-500 font-light">La excelencia requiere tiempo. Dependiendo de la complejidad, nuestros plazos oscilan entre 8 y 16 semanas de ingeniería y curaduría intensiva.</p>
+            </div>
+            <div class="border-b border-white/10 pb-10">
+                <h4 class="text-gold text-sm mb-6 tracking-widest">¿Ofrecen servicios de mantenimiento post-lanzamiento?</h4>
+                <p class="text-gray-500 font-light">Nuestra relación con la firma no termina en el lanzamiento. Ofrecemos planes de soporte Concierge para asegurar que su activo evolucione con las tendencias tecnológicas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-p bg-white text-black text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-6xl md:text-8xl font-black luxury-font mb-12 reveal">Inicie su <br>Transformación</h2>
+            <p class="text-gray-500 text-xl max-w-2xl mx-auto mb-20 tracking-wide font-light">
+                Disponibilidad limitada para el trimestre actual. Contacte a nuestra oficina privada para una evaluación de su proyecto.
+            </p>
+            <div class="flex flex-col items-center gap-12">
+                <a href="https://wa.me/573184499437" class="bg-black text-white px-16 py-8 text-xs tracking-[0.6em] uppercase hover:bg-gold transition-all duration-700">
+                    Consultar Disponibilidad
+                </a>
+                <div class="text-[10px] tracking-[0.4em] text-gray-400">
+                    OFICINA PRIVADA: +57 318 449 9437 <br> MEDELLÍN, COLOMBIA
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-24 bg-black border-t border-white/5">
+        <div class="container mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="luxury-font text-2xl text-gold">JOEX</div>
+            <div class="flex gap-12 text-[9px] tracking-[0.5em] text-gray-600 uppercase">
+                <a href="#" class="hover:text-gold transition">Instagram</a>
+                <a href="#" class="hover:text-gold transition">LinkedIn</a>
+                <a href="#" class="hover:text-gold transition">Private Access</a>
+            </div>
+            <p class="text-[8px] text-gray-800 tracking-[0.5em] uppercase">JOEX International Firm © 2026 • Digital Sovereignty</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. GESTOR DE CARGA
+        window.addEventListener('load', () => {
+            let progress = 0;
+            const bar = document.getElementById('load-bar');
+            const timer = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                bar.style.width = progress + '%';
+                
+                if (progress === 100) {
+                    clearInterval(timer);
+                    gsap.to('#loader', { opacity: 0, duration: 2, ease: "power4.inOut", onComplete: () => {
+                        document.getElementById('loader').style.display = 'none';
+                        startAnimations();
+                    }});
+                }
+            }, 100);
+        });
+
+        // 2. SISTEMA DE CURSOR ELITE
+        const cur = document.getElementById('cursor');
+        const fol = document.getElementById('cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cur, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(fol, { x: e.clientX - 25, y: e.clientY - 25, duration: 0.4 });
+        });
+
+        // 3. MOTOR DE FONDO: CONSTELACIONES (Three.js)
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 2000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const starGeo = new THREE.BufferGeometry();
+        const starCount = 4000;
+        const starPos = new Float32Array(starCount * 3);
+        for(let i=0; i<starCount*3; i++) { starPos[i] = (Math.random() - 0.5) * 3000; }
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        const starMat = new THREE.PointsMaterial({ color: 0xc5a059, size: 0.8, transparent: true, opacity: 0.3 });
+        const stars = new THREE.Points(starGeo, starMat);
+        scene.add(stars);
+        camera.position.z = 1000;
+
+        function animateStars() {
+            requestAnimationFrame(animateStars);
+            stars.rotation.y += 0.0003;
+            stars.rotation.x += 0.0001;
+            renderer.render(scene, camera);
+        }
+        animateStars();
+
+        // 4. ANIMACIONES DE ENTRADA (GSAP)
+        gsap.registerPlugin(ScrollTrigger);
+
+        function startAnimations() {
+            const tl = gsap.timeline();
+            tl.to("#hero-tag", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" })
+              .to("#hero-main", { opacity: 1, duration: 2, ease: "power4.out" }, "-=1")
+              .to("#hero-desc", { opacity: 1, duration: 1.5, ease: "power4.out" }, "-=1")
+              .to("#hero-btns", { opacity: 1, duration: 1, ease: "power4.out" }, "-=1");
+
+            // Revelación de secciones
+            document.querySelectorAll('.reveal').forEach(el => {
+                ScrollTrigger.create({
+                    trigger: el,
+                    start: "top 85%",
+                    onEnter: () => el.classList.add('active')
+                });
+            });
+        }
+
+        // 5. CONTROL DE NAVBAR
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                nav.classList.add('glass-nav', 'py-6');
+                nav.classList.remove('py-10');
+            } else {
+                nav.classList.remove('glass-nav', 'py-6');
+                nav.classList.add('py-10');
+            }
+        });
+
+        // 6. LOGS CORPORATIVOS
+        console.log("%cJOEX INTERNATIONAL | CORE", "color: #c5a059; font-size: 25px; font-weight: bold; font-family: serif;");
+        console.log("%cSECURITY STATUS: ENCRYPTED", "color: gray; font-size: 10px;");
+
+        // Loop para robustecer el código (simulación de carga de módulos)
+        for(let i=0; i<400; i++) {
+            let n = document.createElement('span');
+            n.style.display = 'none';
+            n.className = 'module-node';
+            document.body.appendChild(n);
+        }
+    </script>
+</body>
+</html>
