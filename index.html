@@ -1,427 +1,2764 @@
+<!-- ========================================================= -->
+<!-- JOEX AGENCIA DIGITAL - LUXURY INTERNATIONAL EXPERIENCE -->
+<!-- SENIOR SOFTWARE ARCHITECTURE VERSION -->
+<!-- PART 1 / CONTINUARÁ -->
+<!-- ========================================================= -->
+
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOEX | International Digital Architecture & Private Consulting</title>
-    
+
+    <!-- ========================================================= -->
+    <!-- META CONFIGURATION -->
+    <!-- ========================================================= -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JOEX Agencia Digital | Luxury Digital Architecture</title>
+
+    <meta name="description"
+        content="JOEX Agencia Digital - Arquitectura digital premium, branding de lujo, ingeniería web corporativa y consultoría internacional." />
+
+    <meta name="theme-color" content="#050505" />
+
+    <!-- ========================================================= -->
+    <!-- PRECONNECT -->
+    <!-- ========================================================= -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- ========================================================= -->
+    <!-- FONTS -->
+    <!-- ========================================================= -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- ========================================================= -->
+    <!-- LIBRARIES -->
+    <!-- ========================================================= -->
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@100;200;300;400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- ========================================================= -->
+    <!-- TAILWIND CONFIG -->
+    <!-- ========================================================= -->
+
+    <script>
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#c5a059',
+                        dark: '#050505',
+                        soft: '#0a0a0a',
+                        cream: '#f4f4f4'
+                    }
+                }
+            }
+        }
+
+    </script>
+
+    <!-- ========================================================= -->
+    <!-- MAIN STYLES -->
+    <!-- ========================================================= -->
 
     <style>
+
+        /* ========================================================= */
+        /* ROOT VARIABLES */
+        /* ========================================================= */
+
         :root {
+
             --gold: #c5a059;
             --gold-light: #e3c186;
             --dark: #050505;
-            --dark-soft: #0a0a0a;
-            --cream: #f4f4f4;
-            --transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            --soft-dark: #0a0a0a;
+            --cream: #f5f5f5;
+            --white-soft: rgba(255,255,255,0.04);
+
+            --transition:
+                all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+
         }
 
-        * { cursor: none !important; margin: 0; padding: 0; box-sizing: border-box; }
+        /* ========================================================= */
+        /* RESET */
+        /* ========================================================= */
+
+        * {
+
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        html,
+        body {
+
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+
+        }
 
         body {
-            background-color: var(--dark);
+
+            background: var(--dark);
             color: var(--cream);
             font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
             line-height: 1.6;
+
         }
 
-        h1, h2, h3, h4, .luxury-font { 
-            font-family: 'Cinzel', serif; 
-            letter-spacing: 0.2em; 
-            text-transform: uppercase;
+        /* ========================================================= */
+        /* CUSTOM SCROLLBAR */
+        /* ========================================================= */
+
+        ::-webkit-scrollbar {
+
+            width: 4px;
+
         }
 
-        /* --- LOADER CINEMÁTICO --- */
-        #loader {
-            position: fixed;
-            inset: 0;
+        ::-webkit-scrollbar-track {
+
             background: #000;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1.5s ease;
-        }
-        .loader-brand { font-size: 3rem; margin-bottom: 2rem; }
-        .loader-track { width: 300px; height: 1px; background: rgba(197, 160, 89, 0.1); position: relative; }
-        .loader-bar { position: absolute; left: 0; top: 0; height: 100%; background: var(--gold); width: 0%; }
 
-        /* --- CURSOR PERSONALIZADO --- */
+        }
+
+        ::-webkit-scrollbar-thumb {
+
+            background: var(--gold);
+
+        }
+
+        /* ========================================================= */
+        /* GLOBAL TYPOGRAPHY */
+        /* ========================================================= */
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .luxury-font {
+
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+
+        }
+
+        p {
+
+            font-weight: 300;
+
+        }
+
+        /* ========================================================= */
+        /* CUSTOM CURSOR */
+        /* ========================================================= */
+
         #cursor {
-            width: 10px; height: 10px; background: var(--gold);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 10000; mix-blend-mode: difference;
-        }
-        #cursor-follower {
-            width: 50px; height: 50px; border: 0.5px solid var(--gold);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transition: transform 0.2s ease-out;
+
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+
+            border-radius: 50%;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            z-index: 999999;
+
+            pointer-events: none;
+
+            mix-blend-mode: difference;
+
         }
 
-        /* --- ESTÉTICA GENERAL --- */
-        .text-gold {
-            background: linear-gradient(135deg, #c5a059 0%, #f9f295 50%, #c5a059 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        #cursor-follower {
+
+            width: 50px;
+            height: 50px;
+
+            border: 1px solid rgba(197,160,89,0.4);
+
+            border-radius: 50%;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            z-index: 999998;
+
+            pointer-events: none;
+
         }
+
+        /* ========================================================= */
+        /* BACKGROUND CANVAS */
+        /* ========================================================= */
+
+        #bg-canvas {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: -2;
+
+        }
+
+        /* ========================================================= */
+        /* CINEMATIC LOADER */
+        /* ========================================================= */
+
+        #loader {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: #000;
+
+            z-index: 9999999;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+
+        }
+
+        .loader-brand {
+
+            font-size: 5rem;
+
+            color: var(--gold);
+
+            margin-bottom: 40px;
+
+            font-family: 'Cinzel', serif;
+
+            letter-spacing: 0.4em;
+
+        }
+
+        .loader-track {
+
+            width: 320px;
+            height: 1px;
+
+            background: rgba(255,255,255,0.08);
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        .loader-bar {
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            height: 100%;
+            width: 0%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--gold),
+                transparent
+            );
+
+        }
+
+        .loader-sub {
+
+            margin-top: 30px;
+
+            font-size: 10px;
+
+            letter-spacing: 0.8em;
+
+            color: rgba(255,255,255,0.3);
+
+            text-transform: uppercase;
+
+        }
+
+        /* ========================================================= */
+        /* NAVBAR */
+        /* ========================================================= */
 
         .glass-nav {
-            background: rgba(5, 5, 5, 0.85);
+
+            background: rgba(0,0,0,0.75);
+
             backdrop-filter: blur(30px);
-            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+
         }
 
-        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+        .nav-link {
 
-        .section-p { padding: 180px 0; }
-
-        /* --- COMPONENTES DE LUJO --- */
-        .btn-luxury {
-            border: 1px solid var(--gold);
-            padding: 20px 50px;
-            font-size: 10px;
-            letter-spacing: 0.5em;
-            color: var(--gold);
-            background: transparent;
-            transition: var(--transition);
-            display: inline-block;
             position: relative;
-        }
-        .btn-luxury:hover { background: var(--gold); color: #000; box-shadow: 0 0 30px rgba(197, 160, 89, 0.3); }
 
-        .card-service {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(197, 160, 89, 0.05);
-            padding: 80px 60px;
             transition: var(--transition);
-        }
-        .card-service:hover {
-            background: rgba(197, 160, 89, 0.03);
-            border-color: var(--gold);
-            transform: translateY(-20px);
+
         }
 
-        /* --- ANIMACIONES DE TEXTO --- */
-        .reveal { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transition: clip-path 1.5s ease; }
-        .reveal.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        .nav-link::after {
 
-        /* --- SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-track { background: var(--dark); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); }
+            content: '';
+
+            position: absolute;
+
+            left: 0;
+            bottom: -10px;
+
+            width: 0%;
+            height: 1px;
+
+            background: var(--gold);
+
+            transition: var(--transition);
+
+        }
+
+        .nav-link:hover::after {
+
+            width: 100%;
+
+        }
+
+        .nav-link:hover {
+
+            color: var(--gold);
+
+        }
+
+        /* ========================================================= */
+        /* BUTTONS */
+        /* ========================================================= */
+
+        .btn-luxury {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding:
+                20px
+                45px;
+
+            border: 1px solid rgba(197,160,89,0.4);
+
+            color: var(--gold);
+
+            letter-spacing: 0.4em;
+
+            text-transform: uppercase;
+
+            font-size: 10px;
+
+            transition: var(--transition);
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 14px;
+
+        }
+
+        .btn-luxury::before {
+
+            content: '';
+
+            position: absolute;
+
+            inset: 0;
+
+            transform: translateX(-100%);
+
+            background: var(--gold);
+
+            transition: var(--transition);
+
+            z-index: -1;
+
+        }
+
+        .btn-luxury:hover::before {
+
+            transform: translateX(0);
+
+        }
+
+        .btn-luxury:hover {
+
+            color: #000;
+
+            box-shadow:
+                0 0 30px rgba(197,160,89,0.3);
+
+        }
+
+        /* ========================================================= */
+        /* HERO SECTION */
+        /* ========================================================= */
+
+        .hero-gradient {
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(197,160,89,0.12),
+                    transparent 50%
+                );
+
+            z-index: -1;
+
+        }
+
+        .hero-title {
+
+            line-height: 0.95;
+
+        }
+
+        /* ========================================================= */
+        /* TEXT GOLD */
+        /* ========================================================= */
+
+        .text-gold {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #c5a059 0%,
+                    #f9f295 50%,
+                    #c5a059 100%
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+        /* ========================================================= */
+        /* SECTION PADDING */
+        /* ========================================================= */
+
+        .section-padding {
+
+            padding:
+                180px
+                0;
+
+        }
+
+        /* ========================================================= */
+        /* SERVICE CARD */
+        /* ========================================================= */
+
+        .service-card {
+
+            background:
+                rgba(255,255,255,0.02);
+
+            border:
+                1px solid rgba(255,255,255,0.04);
+
+            padding:
+                70px 50px;
+
+            transition:
+                var(--transition);
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        .service-card::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--gold),
+                    transparent
+                );
+
+            transform:
+                translateX(-100%);
+
+            transition:
+                1s ease;
+
+        }
+
+        .service-card:hover::before {
+
+            transform:
+                translateX(100%);
+
+        }
+
+        .service-card:hover {
+
+            transform:
+                translateY(-20px);
+
+            border-color:
+                rgba(197,160,89,0.2);
+
+            background:
+                rgba(197,160,89,0.03);
+
+        }
+
+        /* ========================================================= */
+        /* REVEAL ANIMATION */
+        /* ========================================================= */
+
+        .reveal {
+
+            clip-path:
+                polygon(
+                    0 0,
+                    100% 0,
+                    100% 0,
+                    0 0
+                );
+
+            transition:
+                1.4s ease;
+
+        }
+
+        .reveal.active {
+
+            clip-path:
+                polygon(
+                    0 0,
+                    100% 0,
+                    100% 100%,
+                    0 100%
+                );
+
+        }
+
+        /* ========================================================= */
+        /* IMAGE WRAPPER */
+        /* ========================================================= */
+
+        .image-wrapper {
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        .image-wrapper img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 1.5s ease;
+
+        }
+
+        .image-wrapper:hover img {
+
+            transform:
+                scale(1.05);
+
+        }
+
+        /* ========================================================= */
+        /* STATS */
+        /* ========================================================= */
+
+        .stat-number {
+
+            font-size:
+                clamp(
+                    3rem,
+                    8vw,
+                    7rem
+                );
+
+            line-height: 1;
+
+            font-family:
+                'Cinzel',
+                serif;
+
+            color:
+                var(--gold);
+
+        }
+
+        /* ========================================================= */
+        /* FORM */
+        /* ========================================================= */
+
+        .luxury-input {
+
+            width: 100%;
+
+            background:
+                transparent;
+
+            border:
+                none;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.1);
+
+            padding:
+                20px 0;
+
+            color:
+                white;
+
+            outline:
+                none;
+
+            transition:
+                var(--transition);
+
+        }
+
+        .luxury-input:focus {
+
+            border-color:
+                var(--gold);
+
+        }
+
+        textarea.luxury-input {
+
+            resize: none;
+
+            min-height: 160px;
+
+        }
+
+        /* ========================================================= */
+        /* FAQ */
+        /* ========================================================= */
+
+        .faq-item {
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+
+            padding:
+                40px 0;
+
+        }
+
+        /* ========================================================= */
+        /* FOOTER */
+        /* ========================================================= */
+
+        footer {
+
+            border-top:
+                1px solid rgba(255,255,255,0.05);
+
+        }
+
+        /* ========================================================= */
+        /* WHATSAPP FLOAT */
+        /* ========================================================= */
+
+        .whatsapp-container {
+
+            position: fixed;
+
+            right: 30px;
+            bottom: 30px;
+
+            z-index: 99999;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-end;
+
+            gap: 12px;
+
+        }
+
+        .wa-option {
+
+            background:
+                rgba(0,0,0,0.9);
+
+            border:
+                1px solid rgba(197,160,89,0.2);
+
+            padding:
+                16px 22px;
+
+            color:
+                white;
+
+            font-size:
+                12px;
+
+            letter-spacing:
+                0.1em;
+
+            border-radius:
+                999px;
+
+            transform:
+                translateY(20px);
+
+            opacity:
+                0;
+
+            pointer-events:
+                none;
+
+            transition:
+                var(--transition);
+
+        }
+
+        .wa-option.active {
+
+            transform:
+                translateY(0);
+
+            opacity:
+                1;
+
+            pointer-events:
+                auto;
+
+        }
+
+        .wa-main {
+
+            width:
+                70px;
+
+            height:
+                70px;
+
+            border-radius:
+                50%;
+
+            border:
+                none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #25D366,
+                    #128C7E
+                );
+
+            color:
+                white;
+
+            font-size:
+                26px;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 10px 40px rgba(0,0,0,0.4);
+
+        }
+
+        /* ========================================================= */
+        /* LANGUAGE SELECTOR */
+        /* ========================================================= */
+
+        .language-select {
+
+            background:
+                transparent;
+
+            border:
+                1px solid rgba(255,255,255,0.1);
+
+            color:
+                white;
+
+            padding:
+                10px 16px;
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                0.3em;
+
+            outline:
+                none;
+
+        }
+
+        .language-select option {
+
+            background:
+                #000;
+
+        }
+
+        /* ========================================================= */
+        /* MEDIA QUERIES */
+        /* ========================================================= */
+
+        @media (max-width: 768px) {
+
+            .loader-brand {
+
+                font-size: 2.5rem;
+
+            }
+
+            .section-padding {
+
+                padding:
+                    120px 0;
+
+            }
+
+            .service-card {
+
+                padding:
+                    50px 35px;
+
+            }
+
+            .btn-luxury {
+
+                padding:
+                    18px 28px;
+
+            }
+
+        }
+
     </style>
+
 </head>
+
 <body>
 
+    <!-- ========================================================= -->
+    <!-- CINEMATIC LOADER -->
+    <!-- ========================================================= -->
+
     <div id="loader">
-        <div class="loader-brand text-gold luxury-font">JOEX</div>
-        <div class="loader-track"><div class="loader-bar" id="load-bar"></div></div>
-        <div class="mt-8 text-[10px] tracking-[1em] uppercase opacity-40 font-light">
-            Authorized Personnel Only
+
+        <div class="loader-brand">
+            JOEX
         </div>
+
+        <div class="loader-track">
+            <div class="loader-bar" id="loaderBar"></div>
+        </div>
+
+        <div class="loader-sub">
+            International Digital Architecture
+        </div>
+
     </div>
 
+    <!-- ========================================================= -->
+    <!-- CUSTOM CURSOR -->
+    <!-- ========================================================= -->
+
     <div id="cursor"></div>
+
     <div id="cursor-follower"></div>
+
+    <!-- ========================================================= -->
+    <!-- THREE JS BACKGROUND -->
+    <!-- ========================================================= -->
+
     <canvas id="bg-canvas"></canvas>
 
-    <nav class="fixed w-full z-[500] py-10 px-16 transition-all duration-700" id="navbar">
-        <div class="max-w-[1800px] mx-auto flex justify-between items-center">
-            <div class="text-4xl font-black text-gold luxury-font tracking-[0.3em]">JOEX</div>
-            
-            <div class="hidden lg:flex space-x-20 items-center">
-                <div class="flex space-x-12 uppercase text-[9px] tracking-[0.5em] font-light text-gray-400">
-                    <a href="#firma" class="hover:text-gold transition">La Firma</a>
-                    <a href="#activos" class="hover:text-gold transition">Activos Digitales</a>
-                    <a href="#legado" class="hover:text-gold transition">Legado</a>
-                </div>
-                <a href="https://wa.me/573184499437" class="btn-luxury">Concierge Privado</a>
+    <!-- ========================================================= -->
+    <!-- NAVBAR -->
+    <!-- ========================================================= -->
+
+    <nav
+        id="navbar"
+        class="fixed top-0 left-0 w-full z-[999] py-8 transition-all duration-700">
+
+        <div
+            class="max-w-[1800px] mx-auto px-6 md:px-14 flex items-center justify-between">
+
+            <!-- BRAND -->
+
+            <div
+                class="text-3xl md:text-4xl font-black luxury-font text-gold tracking-[0.4em]">
+
+                JOEX
+
             </div>
 
-            <div class="lg:hidden text-gold text-2xl">
-                <i class="fa-solid fa-bars-staggered"></i>
+            <!-- DESKTOP NAV -->
+
+            <div
+                class="hidden lg:flex items-center gap-16">
+
+                <a
+                    href="#about"
+                    class="nav-link text-[10px] uppercase tracking-[0.5em] text-gray-400">
+
+                    Firma
+
+                </a>
+
+                <a
+                    href="#services"
+                    class="nav-link text-[10px] uppercase tracking-[0.5em] text-gray-400">
+
+                    Servicios
+
+                </a>
+
+                <a
+                    href="#stats"
+                    class="nav-link text-[10px] uppercase tracking-[0.5em] text-gray-400">
+
+                    Legado
+
+                </a>
+
+                <a
+                    href="#contact"
+                    class="nav-link text-[10px] uppercase tracking-[0.5em] text-gray-400">
+
+                    Contacto
+
+                </a>
+
+                <!-- LANGUAGE -->
+
+                <select
+                    id="languageSwitcher"
+                    class="language-select">
+
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                    <option value="it">IT</option>
+                    <option value="de">DE</option>
+                    <option value="fr">FR</option>
+                    <option value="pt">PT</option>
+                    <option value="ru">RU</option>
+                    <option value="zh">ZH</option>
+                    <option value="ja">JA</option>
+                    <option value="ko">KO</option>
+                    <option value="ar">AR</option>
+                    <option value="nl">NL</option>
+                    <option value="sv">SV</option>
+                    <option value="pl">PL</option>
+                    <option value="tr">TR</option>
+
+                </select>
+
+                <!-- CTA -->
+
+                <a
+                    href="https://wa.me/573184499437"
+                    class="btn-luxury">
+
+                    Concierge
+
+                </a>
+
             </div>
+
+            <!-- MOBILE -->
+
+            <button
+                class="lg:hidden text-gold text-2xl">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
         </div>
+
     </nav>
 
-    <section class="min-h-screen flex flex-col justify-center items-center relative text-center px-6">
-        <div class="z-10 mt-20">
-            <p class="text-[10px] uppercase tracking-[1em] text-gold mb-16 opacity-0 translate-y-10" id="hero-tag">
-                ESTABLISHED IN MEDELLÍN • SERVING THE GLOBAL ELITE
-            </p>
-            <h1 class="text-7xl md:text-[8vw] font-black leading-[1] mb-16 opacity-0" id="hero-main">
-                INGENIERÍA DE <br> <span class="text-gold">PRESTIGIO DIGITAL</span>
+    <!-- ========================================================= -->
+    <!-- HERO -->
+    <!-- ========================================================= -->
+
+    <section
+        class="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
+
+        <div class="hero-gradient"></div>
+
+        <div
+            class="max-w-[1500px] mx-auto text-center relative z-10">
+
+            <!-- HERO TAG -->
+
+            <div
+                id="heroTag"
+                class="mb-14 text-[10px] tracking-[1em] uppercase text-gold opacity-0">
+
+                ESTABLISHED IN MEDELLÍN • GLOBAL DIGITAL ENGINEERING
+
+            </div>
+
+            <!-- HERO TITLE -->
+
+            <h1
+                id="heroTitle"
+                class="hero-title text-[13vw] md:text-[8vw] font-black opacity-0">
+
+                DIGITAL <br>
+
+                <span class="text-gold">
+                    PRESTIGE
+                </span>
+
             </h1>
-            <div class="h-[1px] w-32 bg-gold mx-auto mb-16"></div>
-            <p class="text-gray-400 text-xl md:text-2xl max-w-4xl mx-auto mb-20 font-light leading-relaxed tracking-wider opacity-0" id="hero-desc">
-                En JOEX, entendemos que su presencia digital no es una opción, es su legado. Curamos arquitecturas exclusivas para quienes exigen nada menos que la perfección absoluta.
+
+            <!-- DIVIDER -->
+
+            <div
+                class="w-32 h-[1px] bg-gold mx-auto my-16"></div>
+
+            <!-- HERO DESCRIPTION -->
+
+            <p
+                id="heroDescription"
+                class="max-w-5xl mx-auto text-xl md:text-2xl text-gray-400 leading-relaxed opacity-0">
+
+                JOEX Agencia Digital desarrolla ecosistemas digitales de élite,
+                arquitectura premium y experiencias corporativas inmersivas
+                para compañías que exigen excelencia absoluta.
+
             </p>
-            <div class="flex flex-col md:flex-row justify-center gap-12 opacity-0" id="hero-btns">
-                <a href="#activos" class="btn-luxury">Explorar Servicios</a>
-                <a href="https://wa.me/573184499437" class="text-[10px] uppercase tracking-[0.6em] flex items-center gap-6 group hover:text-gold transition">
-                    Agendar Consultoría <i class="fa-solid fa-arrow-right-long group-hover:translate-x-4 transition"></i>
+
+            <!-- BUTTONS -->
+
+            <div
+                id="heroButtons"
+                class="flex flex-col md:flex-row items-center justify-center gap-10 mt-20 opacity-0">
+
+                <a
+                    href="#services"
+                    class="btn-luxury">
+
+                    Explorar Servicios
+
                 </a>
+
+                <a
+                    href="https://wa.me/573184499437"
+                    class="uppercase text-[10px] tracking-[0.6em] text-gray-400 flex items-center gap-6 hover:text-gold transition">
+
+                    Agendar Consultoría
+
+                    <i class="fa-solid fa-arrow-right-long"></i>
+
+                </a>
+
             </div>
+
         </div>
+
     </section>
 
-    <section id="firma" class="section-p container mx-auto px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-            <div class="relative">
-                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-[0.02] luxury-font select-none">JOEX</div>
-                <h2 class="text-6xl font-bold luxury-font mb-12 reveal">Nuestra <br><span class="text-gold">Misión Privada</span></h2>
-                <p class="text-gray-400 text-xl font-light leading-loose mb-12">
-                    Operamos bajo un estricto código de discreción y excelencia. Durante años, hemos sido el socio silencioso detrás de las corporaciones más influyentes, transformando visiones complejas en activos digitales de alto rendimiento.
-                </p>
-                <div class="grid grid-cols-2 gap-12">
-                    <div>
-                        <h4 class="text-gold text-lg mb-4">Visión</h4>
-                        <p class="text-sm text-gray-500 tracking-wider">Liderar la transición de las marcas de lujo hacia la inmortalidad digital.</p>
+    <!-- ========================================================= -->
+    <!-- ABOUT -->
+    <!-- ========================================================= -->
+
+    <section
+        id="about"
+        class="section-padding">
+
+        <div
+            class="max-w-[1600px] mx-auto px-6 md:px-14">
+
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-28 items-center">
+
+                <!-- LEFT -->
+
+                <div>
+
+                    <div
+                        class="text-[15rem] font-black opacity-[0.02] absolute select-none luxury-font">
+
+                        JOEX
+
                     </div>
-                    <div>
-                        <h4 class="text-gold text-lg mb-4">Valores</h4>
-                        <p class="text-sm text-gray-500 tracking-wider">Precisión técnica, estética atemporal y resultados innegables.</p>
+
+                    <h2
+                        class="text-5xl md:text-7xl mb-14 reveal">
+
+                        Nuestra <br>
+
+                        <span class="text-gold">
+                            Filosofía
+                        </span>
+
+                    </h2>
+
+                    <p
+                        class="text-gray-400 text-xl leading-loose mb-14">
+
+                        Operamos bajo un estándar internacional de diseño,
+                        ingeniería y confidencialidad.
+                        Cada proyecto es tratado como un activo estratégico
+                        de largo plazo.
+
+                    </p>
+
+                    <div
+                        class="grid grid-cols-2 gap-10">
+
+                        <div>
+
+                            <div
+                                class="text-gold mb-4 uppercase tracking-[0.4em] text-xs">
+
+                                Visión
+
+                            </div>
+
+                            <p
+                                class="text-gray-500 text-sm leading-relaxed">
+
+                                Liderar la transformación digital premium
+                                en mercados internacionales.
+
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <div
+                                class="text-gold mb-4 uppercase tracking-[0.4em] text-xs">
+
+                                Valores
+
+                            </div>
+
+                            <p
+                                class="text-gray-500 text-sm leading-relaxed">
+
+                                Precisión técnica, estética atemporal y
+                                resultados medibles.
+
+                            </p>
+
+                        </div>
+
                     </div>
+
                 </div>
+
+                <!-- RIGHT -->
+
+                <div
+                    class="image-wrapper">
+
+                    <img
+                        loading="lazy"
+                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
+                        alt="Luxury Architecture">
+
+                </div>
+
             </div>
-            <div class="relative group">
-                <div class="absolute inset-0 border border-gold/20 translate-x-6 translate-y-6 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-1000"></div>
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070" alt="Estructura de Lujo" class="relative z-10 grayscale hover:grayscale-0 transition duration-1000">
-            </div>
+
         </div>
+
     </section>
 
-    <section id="activos" class="section-p bg-[#030303]">
-        <div class="container mx-auto px-12">
-            <div class="text-center mb-40">
-                <h2 class="text-5xl md:text-7xl font-bold luxury-font mb-8">Soluciones de <span class="text-gold">Soberanía</span></h2>
-                <p class="text-gray-500 uppercase tracking-[0.5em] text-xs">Curaduría de servicios exclusivos</p>
+    <!-- ========================================================= -->
+    <!-- SERVICES -->
+    <!-- ========================================================= -->
+
+    <section
+        id="services"
+        class="section-padding bg-[#030303]">
+
+        <div
+            class="max-w-[1700px] mx-auto px-6 md:px-14">
+
+            <!-- TITLE -->
+
+            <div
+                class="text-center mb-36">
+
+                <div
+                    class="uppercase tracking-[0.8em] text-[10px] text-gold mb-8">
+
+                    Exclusive Engineering
+
+                </div>
+
+                <h2
+                    class="text-5xl md:text-7xl luxury-font">
+
+                    Servicios de <span class="text-gold">Lujo</span>
+
+                </h2>
+
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
-                <div class="card-service">
-                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">01 / ARCHITECTURE</span>
-                    <h3 class="text-2xl font-bold mb-8">Estructuras Corporativas</h3>
-                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Desarrollo de ecosistemas web robustos, diseñados para soportar el crecimiento global y la alta demanda transaccional.</p>
-                    <ul class="text-[10px] space-y-4 tracking-[0.3em] uppercase opacity-40">
-                        <li>• Scalable Backend Architecture</li>
-                        <li>• Enterprise Security Layers</li>
-                        <li>• Global CDN Integration</li>
+            <!-- GRID -->
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+
+                <!-- CARD 1 -->
+
+                <div
+                    class="service-card">
+
+                    <div
+                        class="text-gold text-[10px] tracking-[0.5em] mb-10">
+
+                        01 / DEVELOPMENT
+
+                    </div>
+
+                    <h3
+                        class="text-3xl mb-8">
+
+                        Arquitectura Web
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 text-lg leading-relaxed mb-10">
+
+                        Infraestructuras digitales robustas,
+                        optimizadas para velocidad,
+                        seguridad y escalabilidad global.
+
+                    </p>
+
+                    <ul
+                        class="space-y-4 text-[10px] uppercase tracking-[0.4em] text-gray-600">
+
+                        <li>• Enterprise Backend</li>
+                        <li>• Global CDN</li>
+                        <li>• Advanced Security</li>
+                        <li>• Cloud Integration</li>
+
                     </ul>
+
                 </div>
-                <div class="card-service border-x-0 md:border-x-[1px] md:border-white/5">
-                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">02 / INTERFACE</span>
-                    <h3 class="text-2xl font-bold mb-8">Experiencias UI/UX de Élite</h3>
-                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Diseñamos interfaces que respiran lujo. Cada transición y cada píxel están calculados para evocar prestigio.</p>
-                    <ul class="text-[10px] space-y-4 tracking-[0.3em] uppercase opacity-40">
-                        <li>• Sensory Interaction Design</li>
-                        <li>• Custom Typography</li>
-                        <li>• Micro-motion Engineering</li>
+
+                <!-- CARD 2 -->
+
+                <div
+                    class="service-card border-x border-white/5">
+
+                    <div
+                        class="text-gold text-[10px] tracking-[0.5em] mb-10">
+
+                        02 / EXPERIENCE
+
+                    </div>
+
+                    <h3
+                        class="text-3xl mb-8">
+
+                        UI/UX Premium
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 text-lg leading-relaxed mb-10">
+
+                        Interfaces visuales inmersivas,
+                        microinteracciones de lujo y
+                        experiencias sensoriales avanzadas.
+
+                    </p>
+
+                    <ul
+                        class="space-y-4 text-[10px] uppercase tracking-[0.4em] text-gray-600">
+
+                        <li>• Motion Design</li>
+                        <li>• Luxury Interfaces</li>
+                        <li>• Scroll Engineering</li>
+                        <li>• Premium Typography</li>
+
                     </ul>
+
                 </div>
-                <div class="card-service">
-                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">03 / INTELLIGENCE</span>
-                    <h3 class="text-2xl font-bold mb-8">Estrategia de Mercado</h3>
-                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Optimización de activos para dominar los motores de búsqueda y captar el segmento de mayor poder adquisitivo.</p>
-                    <ul class="text-[10px] space-y-4 tracking-[0.3em] uppercase opacity-40">
-                        <li>• Advanced SEO Consulting</li>
-                        <li>• Conversion Psychology</li>
-                        <li>• Data Intelligence</li>
+
+                <!-- CARD 3 -->
+
+                <div
+                    class="service-card">
+
+                    <div
+                        class="text-gold text-[10px] tracking-[0.5em] mb-10">
+
+                        03 / STRATEGY
+
+                    </div>
+
+                    <h3
+                        class="text-3xl mb-8">
+
+                        Estrategia SEO
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 text-lg leading-relaxed mb-10">
+
+                        Posicionamiento orgánico de alto nivel
+                        orientado a mercados premium
+                        y conversión internacional.
+
+                    </p>
+
+                    <ul
+                        class="space-y-4 text-[10px] uppercase tracking-[0.4em] text-gray-600">
+
+                        <li>• Technical SEO</li>
+                        <li>• Data Analysis</li>
+                        <li>• Search Domination</li>
+                        <li>• Analytics</li>
+
                     </ul>
+
                 </div>
-                <div class="card-service border-t-[1px] border-white/5">
-                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">04 / COMMERCE</span>
-                    <h3 class="text-2xl font-bold mb-8">E-Commerce de Alta Gama</h3>
-                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Tiendas online que funcionan como una boutique en la Quinta Avenida. Rapidez y exclusividad total.</p>
-                </div>
-                <div class="card-service border-t-[1px] border-x-0 md:border-x-[1px] border-white/5 bg-white/[0.01]">
-                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">05 / PRIVACY</span>
-                    <h3 class="text-2xl font-bold mb-8">Protección de Datos</h3>
-                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Seguridad de nivel bancario para proteger la integridad de su información y la de sus clientes más exclusivos.</p>
-                </div>
-                <div class="card-service border-t-[1px] border-white/5">
-                    <span class="text-gold text-xs tracking-[0.5em] block mb-12">06 / MAINTENANCE</span>
-                    <h3 class="text-2xl font-bold mb-8">Soporte Concierge 24/7</h3>
-                    <p class="text-gray-500 font-light text-lg leading-relaxed mb-10">Un equipo de ingeniería dedicado exclusivamente a la preservación y actualización de su activo digital.</p>
-                </div>
+
             </div>
+
         </div>
+
+    </section>
+    <!-- ========================================================= -->
+    <!-- STATS -->
+    <!-- ========================================================= -->
+
+    <section
+        id="stats"
+        class="section-padding bg-black">
+
+        <div
+            class="max-w-[1700px] mx-auto px-6 md:px-14">
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-20">
+
+                <!-- ITEM -->
+
+                <div
+                    class="text-center xl:text-left">
+
+                    <div class="stat-number">
+                        14
+                    </div>
+
+                    <div
+                        class="uppercase tracking-[0.5em] text-[10px] text-gray-500 mt-6">
+
+                        Años de Experiencia
+
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+
+                <div
+                    class="text-center xl:text-left">
+
+                    <div class="stat-number">
+                        500+
+                    </div>
+
+                    <div
+                        class="uppercase tracking-[0.5em] text-[10px] text-gray-500 mt-6">
+
+                        Proyectos Ejecutados
+
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+
+                <div
+                    class="text-center xl:text-left">
+
+                    <div class="stat-number">
+                        24/7
+                    </div>
+
+                    <div
+                        class="uppercase tracking-[0.5em] text-[10px] text-gray-500 mt-6">
+
+                        Concierge Support
+
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+
+                <div
+                    class="text-center xl:text-left">
+
+                    <div class="stat-number">
+                        Elite
+                    </div>
+
+                    <div
+                        class="uppercase tracking-[0.5em] text-[10px] text-gray-500 mt-6">
+
+                        Global Clients
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </section>
 
-    <section id="legado" class="section-p bg-black">
-        <div class="container mx-auto px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-20">
-                <div class="text-center lg:text-left">
-                    <p class="text-6xl font-bold text-gold luxury-font mb-4">14</p>
-                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Años de Trayectoria</p>
-                </div>
-                <div class="text-center lg:text-left">
-                    <p class="text-6xl font-bold text-gold luxury-font mb-4">500+</p>
-                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Activos Implementados</p>
-                </div>
-                <div class="text-center lg:text-left">
-                    <p class="text-6xl font-bold text-gold luxury-font mb-4">100%</p>
-                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Confidencialidad</p>
-                </div>
-                <div class="text-center lg:text-left">
-                    <p class="text-6xl font-bold text-gold luxury-font mb-4">Elite</p>
-                    <p class="text-[10px] tracking-[0.4em] uppercase text-gray-500">Círculo de Clientes</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- ========================================================= -->
+    <!-- PARALLAX SHOWCASE -->
+    <!-- ========================================================= -->
 
-    <section class="section-p container mx-auto px-12 max-w-4xl">
-        <h2 class="text-4xl font-bold luxury-font text-center mb-24">Preguntas de <span class="text-gold">Consultoría</span></h2>
-        <div class="space-y-12">
-            <div class="border-b border-white/10 pb-10">
-                <h4 class="text-gold text-sm mb-6 tracking-widest">¿Cómo garantizan la exclusividad de mi diseño?</h4>
-                <p class="text-gray-500 font-light">Cada proyecto en JOEX nace de una hoja en blanco. No utilizamos plantillas ni estructuras pre-fabricadas. Su activo digital será único en el mercado global.</p>
-            </div>
-            <div class="border-b border-white/10 pb-10">
-                <h4 class="text-gold text-sm mb-6 tracking-widest">¿Cuál es el tiempo de ejecución para una arquitectura corporativa?</h4>
-                <p class="text-gray-500 font-light">La excelencia requiere tiempo. Dependiendo de la complejidad, nuestros plazos oscilan entre 8 y 16 semanas de ingeniería y curaduría intensiva.</p>
-            </div>
-            <div class="border-b border-white/10 pb-10">
-                <h4 class="text-gold text-sm mb-6 tracking-widest">¿Ofrecen servicios de mantenimiento post-lanzamiento?</h4>
-                <p class="text-gray-500 font-light">Nuestra relación con la firma no termina en el lanzamiento. Ofrecemos planes de soporte Concierge para asegurar que su activo evolucione con las tendencias tecnológicas.</p>
-            </div>
-        </div>
-    </section>
+    <section
+        class="section-padding relative overflow-hidden">
 
-    <section class="section-p bg-white text-black text-center">
-        <div class="container mx-auto px-6">
-            <h2 class="text-6xl md:text-8xl font-black luxury-font mb-12 reveal">Inicie su <br>Transformación</h2>
-            <p class="text-gray-500 text-xl max-w-2xl mx-auto mb-20 tracking-wide font-light">
-                Disponibilidad limitada para el trimestre actual. Contacte a nuestra oficina privada para una evaluación de su proyecto.
+        <div
+            class="absolute inset-0 opacity-10">
+
+            <img
+                loading="lazy"
+                src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&q=80&w=2000"
+                class="w-full h-full object-cover"
+                alt="Luxury">
+
+        </div>
+
+        <div
+            class="relative z-10 max-w-[1600px] mx-auto px-6 md:px-14 text-center">
+
+            <div
+                class="uppercase text-gold tracking-[0.7em] text-[10px] mb-10">
+
+                PRIVATE DIGITAL CONSULTING
+
+            </div>
+
+            <h2
+                class="text-5xl md:text-8xl luxury-font leading-tight mb-16 reveal">
+
+                Creamos Activos <br>
+
+                <span class="text-gold">
+                    Memorables
+                </span>
+
+            </h2>
+
+            <p
+                class="max-w-4xl mx-auto text-xl text-gray-400 leading-loose">
+
+                Cada experiencia digital desarrollada por JOEX
+                está diseñada para proyectar sofisticación,
+                exclusividad y autoridad internacional.
+
             </p>
-            <div class="flex flex-col items-center gap-12">
-                <a href="https://wa.me/573184499437" class="bg-black text-white px-16 py-8 text-xs tracking-[0.6em] uppercase hover:bg-gold transition-all duration-700">
-                    Consultar Disponibilidad
-                </a>
-                <div class="text-[10px] tracking-[0.4em] text-gray-400">
-                    OFICINA PRIVADA: +57 318 449 9437 <br> MEDELLÍN, COLOMBIA
-                </div>
-            </div>
+
         </div>
+
     </section>
 
-    <footer class="py-24 bg-black border-t border-white/5">
-        <div class="container mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-12">
-            <div class="luxury-font text-2xl text-gold">JOEX</div>
-            <div class="flex gap-12 text-[9px] tracking-[0.5em] text-gray-600 uppercase">
-                <a href="#" class="hover:text-gold transition">Instagram</a>
-                <a href="#" class="hover:text-gold transition">LinkedIn</a>
-                <a href="#" class="hover:text-gold transition">Private Access</a>
+    <!-- ========================================================= -->
+    <!-- PROCESS -->
+    <!-- ========================================================= -->
+
+    <section
+        class="section-padding bg-[#020202]">
+
+        <div
+            class="max-w-[1700px] mx-auto px-6 md:px-14">
+
+            <!-- TITLE -->
+
+            <div
+                class="mb-32">
+
+                <div
+                    class="uppercase tracking-[0.8em] text-[10px] text-gold mb-8">
+
+                    Internal Methodology
+
+                </div>
+
+                <h2
+                    class="text-5xl md:text-7xl luxury-font">
+
+                    Proceso <span class="text-gold">JOEX</span>
+
+                </h2>
+
             </div>
-            <p class="text-[8px] text-gray-800 tracking-[0.5em] uppercase">JOEX International Firm © 2026 • Digital Sovereignty</p>
+
+            <!-- PROCESS GRID -->
+
+            <div
+                class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+
+                <!-- STEP -->
+
+                <div
+                    class="service-card">
+
+                    <div
+                        class="text-[5rem] text-gold luxury-font opacity-30 mb-8">
+
+                        01
+
+                    </div>
+
+                    <h3
+                        class="text-2xl mb-6">
+
+                        Discovery
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-relaxed">
+
+                        Evaluación estratégica de la marca,
+                        objetivos corporativos y estructura digital.
+
+                    </p>
+
+                </div>
+
+                <!-- STEP -->
+
+                <div
+                    class="service-card">
+
+                    <div
+                        class="text-[5rem] text-gold luxury-font opacity-30 mb-8">
+
+                        02
+
+                    </div>
+
+                    <h3
+                        class="text-2xl mb-6">
+
+                        Architecture
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-relaxed">
+
+                        Diseño de experiencia premium,
+                        estructura UX y arquitectura técnica avanzada.
+
+                    </p>
+
+                </div>
+
+                <!-- STEP -->
+
+                <div
+                    class="service-card">
+
+                    <div
+                        class="text-[5rem] text-gold luxury-font opacity-30 mb-8">
+
+                        03
+
+                    </div>
+
+                    <h3
+                        class="text-2xl mb-6">
+
+                        Development
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-relaxed">
+
+                        Ingeniería frontend/backend,
+                        optimización y seguridad empresarial.
+
+                    </p>
+
+                </div>
+
+                <!-- STEP -->
+
+                <div
+                    class="service-card">
+
+                    <div
+                        class="text-[5rem] text-gold luxury-font opacity-30 mb-8">
+
+                        04
+
+                    </div>
+
+                    <h3
+                        class="text-2xl mb-6">
+
+                        Launch
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-relaxed">
+
+                        Despliegue global,
+                        mantenimiento concierge y escalabilidad.
+
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
+
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FAQ -->
+    <!-- ========================================================= -->
+
+    <section
+        class="section-padding">
+
+        <div
+            class="max-w-[1200px] mx-auto px-6 md:px-14">
+
+            <!-- TITLE -->
+
+            <div
+                class="text-center mb-24">
+
+                <div
+                    class="uppercase tracking-[0.8em] text-[10px] text-gold mb-8">
+
+                    Strategic Questions
+
+                </div>
+
+                <h2
+                    class="text-5xl md:text-7xl luxury-font">
+
+                    FAQ Privado
+
+                </h2>
+
+            </div>
+
+            <!-- FAQ LIST -->
+
+            <div>
+
+                <!-- ITEM -->
+
+                <div class="faq-item">
+
+                    <h3
+                        class="text-gold text-lg mb-6">
+
+                        ¿Cómo garantizan exclusividad total?
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-loose">
+
+                        Cada plataforma se desarrolla desde cero.
+                        JOEX no utiliza plantillas genéricas ni estructuras repetidas.
+
+                    </p>
+
+                </div>
+
+                <!-- ITEM -->
+
+                <div class="faq-item">
+
+                    <h3
+                        class="text-gold text-lg mb-6">
+
+                        ¿Qué tecnologías utilizan?
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-loose">
+
+                        Utilizamos stacks modernos,
+                        arquitectura cloud,
+                        frameworks premium y optimización avanzada.
+
+                    </p>
+
+                </div>
+
+                <!-- ITEM -->
+
+                <div class="faq-item">
+
+                    <h3
+                        class="text-gold text-lg mb-6">
+
+                        ¿Trabajan internacionalmente?
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-loose">
+
+                        Sí.
+                        JOEX desarrolla proyectos para clientes internacionales
+                        en América, Europa y Medio Oriente.
+
+                    </p>
+
+                </div>
+
+                <!-- ITEM -->
+
+                <div class="faq-item">
+
+                    <h3
+                        class="text-gold text-lg mb-6">
+
+                        ¿Incluyen mantenimiento premium?
+
+                    </h3>
+
+                    <p
+                        class="text-gray-500 leading-loose">
+
+                        Ofrecemos soporte concierge 24/7,
+                        monitoreo y mantenimiento corporativo continuo.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- CONTACT -->
+    <!-- ========================================================= -->
+
+    <section
+        id="contact"
+        class="section-padding bg-white text-black">
+
+        <div
+            class="max-w-[1300px] mx-auto px-6 md:px-14">
+
+            <!-- TITLE -->
+
+            <div
+                class="text-center mb-24">
+
+                <div
+                    class="uppercase tracking-[0.8em] text-[10px] text-gold mb-8">
+
+                    Luxury Consultation
+
+                </div>
+
+                <h2
+                    class="text-5xl md:text-8xl luxury-font leading-tight">
+
+                    Inicie su <br>
+
+                    Transformación
+
+                </h2>
+
+            </div>
+
+            <!-- FORM -->
+
+            <form
+                id="contactForm"
+                class="space-y-14">
+
+                <!-- ROW -->
+
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-14">
+
+                    <div>
+
+                        <input
+                            type="text"
+                            id="name"
+                            class="luxury-input"
+                            placeholder="Nombre Corporativo">
+
+                    </div>
+
+                    <div>
+
+                        <input
+                            type="email"
+                            id="email"
+                            class="luxury-input"
+                            placeholder="Correo Empresarial">
+
+                    </div>
+
+                </div>
+
+                <!-- ROW -->
+
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-14">
+
+                    <div>
+
+                        <input
+                            type="text"
+                            id="company"
+                            class="luxury-input"
+                            placeholder="Empresa">
+
+                    </div>
+
+                    <div>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            class="luxury-input"
+                            placeholder="Número Privado">
+
+                    </div>
+
+                </div>
+
+                <!-- MESSAGE -->
+
+                <div>
+
+                    <textarea
+                        id="message"
+                        class="luxury-input"
+                        placeholder="Describa su visión estratégica"></textarea>
+
+                </div>
+
+                <!-- BUTTON -->
+
+                <div
+                    class="text-center pt-10">
+
+                    <button
+                        type="submit"
+                        class="btn-luxury">
+
+                        Solicitar Evaluación
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================================= -->
+
+    <footer
+        class="py-24 bg-black">
+
+        <div
+            class="max-w-[1700px] mx-auto px-6 md:px-14">
+
+            <div
+                class="flex flex-col lg:flex-row justify-between items-center gap-16">
+
+                <!-- BRAND -->
+
+                <div
+                    class="text-center lg:text-left">
+
+                    <div
+                        class="text-4xl luxury-font text-gold mb-6">
+
+                        JOEX
+
+                    </div>
+
+                    <div
+                        class="uppercase tracking-[0.5em] text-[10px] text-gray-600">
+
+                        International Digital Architecture
+
+                    </div>
+
+                </div>
+
+                <!-- LINKS -->
+
+                <div
+                    class="flex flex-wrap justify-center gap-10 uppercase text-[10px] tracking-[0.5em] text-gray-500">
+
+                    <a href="#" class="hover:text-gold transition">
+                        Instagram
+                    </a>
+
+                    <a href="#" class="hover:text-gold transition">
+                        LinkedIn
+                    </a>
+
+                    <a href="#" class="hover:text-gold transition">
+                        Behance
+                    </a>
+
+                    <a href="#" class="hover:text-gold transition">
+                        Private Access
+                    </a>
+
+                </div>
+
+                <!-- CONTACT -->
+
+                <div
+                    class="text-center lg:text-right">
+
+                    <div
+                        class="text-gray-500 text-sm mb-3">
+
+                        joexagenciadigital@gmail.com
+
+                    </div>
+
+                    <div
+                        class="uppercase tracking-[0.4em] text-[10px] text-gray-700">
+
+                        Medellín • Colombia
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- COPYRIGHT -->
+
+            <div
+                class="border-t border-white/5 mt-20 pt-10 text-center text-[10px] uppercase tracking-[0.5em] text-gray-700">
+
+                JOEX International Firm © 2026 • Digital Sovereignty
+
+            </div>
+
+        </div>
+
     </footer>
 
+    <!-- ========================================================= -->
+    <!-- WHATSAPP FLOAT -->
+    <!-- ========================================================= -->
+
+    <div
+        class="whatsapp-container">
+
+        <!-- OPTIONS -->
+
+        <a
+            href="https://wa.me/573184499437"
+            class="wa-option"
+            id="wa1">
+
+            +57 318 449 9437
+
+        </a>
+
+        <a
+            href="https://wa.me/573023974412"
+            class="wa-option"
+            id="wa2">
+
+            +57 302 397 4412
+
+        </a>
+
+        <!-- MAIN -->
+
+        <button
+            id="waToggle"
+            class="wa-main">
+
+            <i class="fa-brands fa-whatsapp"></i>
+
+        </button>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- MAIN SCRIPT -->
+    <!-- ========================================================= -->
+
     <script>
-        // 1. GESTOR DE CARGA
-        window.addEventListener('load', () => {
-            let progress = 0;
-            const bar = document.getElementById('load-bar');
-            const timer = setInterval(() => {
-                progress += Math.random() * 10;
-                if (progress > 100) progress = 100;
-                bar.style.width = progress + '%';
-                
-                if (progress === 100) {
-                    clearInterval(timer);
-                    gsap.to('#loader', { opacity: 0, duration: 2, ease: "power4.inOut", onComplete: () => {
-                        document.getElementById('loader').style.display = 'none';
-                        startAnimations();
-                    }});
-                }
-            }, 100);
-        });
 
-        // 2. SISTEMA DE CURSOR ELITE
-        const cur = document.getElementById('cursor');
-        const fol = document.getElementById('cursor-follower');
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cur, { x: e.clientX, y: e.clientY, duration: 0.1 });
-            gsap.to(fol, { x: e.clientX - 25, y: e.clientY - 25, duration: 0.4 });
-        });
+        /* ========================================================= */
+        /* GLOBAL APP OBJECT */
+        /* ========================================================= */
 
-        // 3. MOTOR DE FONDO: CONSTELACIONES (Three.js)
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 2000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        const JOEX = {
 
-        const starGeo = new THREE.BufferGeometry();
-        const starCount = 4000;
-        const starPos = new Float32Array(starCount * 3);
-        for(let i=0; i<starCount*3; i++) { starPos[i] = (Math.random() - 0.5) * 3000; }
-        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-        const starMat = new THREE.PointsMaterial({ color: 0xc5a059, size: 0.8, transparent: true, opacity: 0.3 });
-        const stars = new THREE.Points(starGeo, starMat);
-        scene.add(stars);
-        camera.position.z = 1000;
+            init() {
 
-        function animateStars() {
-            requestAnimationFrame(animateStars);
-            stars.rotation.y += 0.0003;
-            stars.rotation.x += 0.0001;
-            renderer.render(scene, camera);
-        }
-        animateStars();
+                this.initializeLoader();
+                this.initializeCursor();
+                this.initializeLenis();
+                this.initializeThreeJS();
+                this.initializeGSAP();
+                this.initializeNavbar();
+                this.initializeWhatsApp();
+                this.initializeForm();
+                this.initializeReveal();
+                this.initializeParallax();
+                this.initializeLazyLoading();
+                this.initializeLanguageSystem();
+                this.initializeConsoleBranding();
 
-        // 4. ANIMACIONES DE ENTRADA (GSAP)
-        gsap.registerPlugin(ScrollTrigger);
-
-        function startAnimations() {
-            const tl = gsap.timeline();
-            tl.to("#hero-tag", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" })
-              .to("#hero-main", { opacity: 1, duration: 2, ease: "power4.out" }, "-=1")
-              .to("#hero-desc", { opacity: 1, duration: 1.5, ease: "power4.out" }, "-=1")
-              .to("#hero-btns", { opacity: 1, duration: 1, ease: "power4.out" }, "-=1");
-
-            // Revelación de secciones
-            document.querySelectorAll('.reveal').forEach(el => {
-                ScrollTrigger.create({
-                    trigger: el,
-                    start: "top 85%",
-                    onEnter: () => el.classList.add('active')
-                });
-            });
-        }
-
-        // 5. CONTROL DE NAVBAR
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                nav.classList.add('glass-nav', 'py-6');
-                nav.classList.remove('py-10');
-            } else {
-                nav.classList.remove('glass-nav', 'py-6');
-                nav.classList.add('py-10');
             }
+
+        };
+
+        /* ========================================================= */
+        /* LOADER */
+        /* ========================================================= */
+
+        JOEX.initializeLoader = function() {
+
+            const loaderBar =
+                document.getElementById('loaderBar');
+
+            let progress = 0;
+
+            const interval =
+                setInterval(() => {
+
+                    progress += Math.random() * 8;
+
+                    if(progress >= 100) {
+
+                        progress = 100;
+
+                        clearInterval(interval);
+
+                        gsap.to('#loader', {
+
+                            opacity: 0,
+                            duration: 1.5,
+                            ease: 'power4.inOut',
+
+                            onComplete: () => {
+
+                                document
+                                    .getElementById('loader')
+                                    .style
+                                    .display = 'none';
+
+                            }
+
+                        });
+
+                    }
+
+                    loaderBar.style.width =
+                        progress + '%';
+
+                }, 80);
+
+        };
+
+        /* ========================================================= */
+        /* CUSTOM CURSOR */
+        /* ========================================================= */
+
+        JOEX.initializeCursor = function() {
+
+            const cursor =
+                document.getElementById('cursor');
+
+            const follower =
+                document.getElementById('cursor-follower');
+
+            document.addEventListener('mousemove', e => {
+
+                gsap.to(cursor, {
+
+                    x: e.clientX,
+                    y: e.clientY,
+
+                    duration: 0.1
+
+                });
+
+                gsap.to(follower, {
+
+                    x: e.clientX - 25,
+                    y: e.clientY - 25,
+
+                    duration: 0.4
+
+                });
+
+            });
+
+        };
+
+        /* ========================================================= */
+        /* LENIS SMOOTH SCROLL */
+        /* ========================================================= */
+
+        JOEX.initializeLenis = function() {
+
+            const lenis = new Lenis({
+
+                duration: 1.3,
+                smoothWheel: true,
+                smoothTouch: false
+
+            });
+
+            function raf(time) {
+
+                lenis.raf(time);
+
+                requestAnimationFrame(raf);
+
+            }
+
+            requestAnimationFrame(raf);
+
+        };
+
+        /* ========================================================= */
+        /* THREE JS BACKGROUND */
+        /* ========================================================= */
+
+        JOEX.initializeThreeJS = function() {
+
+            const scene =
+                new THREE.Scene();
+
+            const camera =
+                new THREE.PerspectiveCamera(
+                    75,
+                    window.innerWidth / window.innerHeight,
+                    0.1,
+                    2000
+                );
+
+            const renderer =
+                new THREE.WebGLRenderer({
+
+                    canvas:
+                        document.getElementById('bg-canvas'),
+
+                    alpha: true
+
+                });
+
+            renderer.setSize(
+                window.innerWidth,
+                window.innerHeight
+            );
+
+            /* STARS */
+
+            const starGeometry =
+                new THREE.BufferGeometry();
+
+            const starCount = 5000;
+
+            const positions =
+                new Float32Array(starCount * 3);
+
+            for(let i = 0; i < starCount * 3; i++) {
+
+                positions[i] =
+                    (Math.random() - 0.5) * 3000;
+
+            }
+
+            starGeometry.setAttribute(
+
+                'position',
+
+                new THREE.BufferAttribute(
+                    positions,
+                    3
+                )
+
+            );
+
+            const starMaterial =
+                new THREE.PointsMaterial({
+
+                    color: 0xc5a059,
+                    size: 0.8,
+                    transparent: true,
+                    opacity: 0.4
+
+                });
+
+            const stars =
+                new THREE.Points(
+                    starGeometry,
+                    starMaterial
+                );
+
+            scene.add(stars);
+
+            camera.position.z = 1000;
+
+            function animate() {
+
+                requestAnimationFrame(animate);
+
+                stars.rotation.y += 0.0002;
+                stars.rotation.x += 0.0001;
+
+                renderer.render(scene, camera);
+
+            }
+
+            animate();
+
+            /* RESIZE */
+
+            window.addEventListener('resize', () => {
+
+                camera.aspect =
+                    window.innerWidth / window.innerHeight;
+
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(
+                    window.innerWidth,
+                    window.innerHeight
+                );
+
+            });
+
+        };
+
+        /* ========================================================= */
+        /* GSAP */
+        /* ========================================================= */
+
+        JOEX.initializeGSAP = function() {
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            const timeline =
+                gsap.timeline();
+
+            timeline
+
+                .to('#heroTag', {
+
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2
+
+                })
+
+                .to('#heroTitle', {
+
+                    opacity: 1,
+                    duration: 1.6
+
+                }, '-=0.6')
+
+                .to('#heroDescription', {
+
+                    opacity: 1,
+                    duration: 1.2
+
+                }, '-=0.8')
+
+                .to('#heroButtons', {
+
+                    opacity: 1,
+                    duration: 1
+
+                }, '-=0.6');
+
+        };
+
+        /* ========================================================= */
+        /* NAVBAR */
+        /* ========================================================= */
+
+        JOEX.initializeNavbar = function() {
+
+            const navbar =
+                document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+
+                if(window.scrollY > 80) {
+
+                    navbar.classList.add(
+                        'glass-nav',
+                        'py-5'
+                    );
+
+                    navbar.classList.remove(
+                        'py-8'
+                    );
+
+                } else {
+
+                    navbar.classList.remove(
+                        'glass-nav',
+                        'py-5'
+                    );
+
+                    navbar.classList.add(
+                        'py-8'
+                    );
+
+                }
+
+            });
+
+        };
+
+        /* ========================================================= */
+        /* WHATSAPP */
+        /* ========================================================= */
+
+        JOEX.initializeWhatsApp = function() {
+
+            const toggle =
+                document.getElementById('waToggle');
+
+            const wa1 =
+                document.getElementById('wa1');
+
+            const wa2 =
+                document.getElementById('wa2');
+
+            let active = false;
+
+            toggle.addEventListener('click', () => {
+
+                active = !active;
+
+                if(active) {
+
+                    wa1.classList.add('active');
+                    wa2.classList.add('active');
+
+                } else {
+
+                    wa1.classList.remove('active');
+                    wa2.classList.remove('active');
+
+                }
+
+            });
+
+        };
+
+        /* ========================================================= */
+        /* FORM VALIDATION */
+        /* ========================================================= */
+
+        JOEX.initializeForm = function() {
+
+            const form =
+                document.getElementById('contactForm');
+
+            form.addEventListener('submit', e => {
+
+                e.preventDefault();
+
+                const name =
+                    document.getElementById('name').value;
+
+                const email =
+                    document.getElementById('email').value;
+
+                const message =
+                    document.getElementById('message').value;
+
+                if(
+                    name.trim() === '' ||
+                    email.trim() === '' ||
+                    message.trim() === ''
+                ) {
+
+                    alert('Complete todos los campos.');
+
+                    return;
+
+                }
+
+                const emailRegex =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if(!emailRegex.test(email)) {
+
+                    alert('Ingrese un correo válido.');
+
+                    return;
+
+                }
+
+                alert(
+                    'Solicitud enviada correctamente.'
+                );
+
+                form.reset();
+
+            });
+
+        };
+
+        /* ========================================================= */
+        /* REVEAL */
+        /* ========================================================= */
+
+        JOEX.initializeReveal = function() {
+
+            document
+                .querySelectorAll('.reveal')
+                .forEach(el => {
+
+                    ScrollTrigger.create({
+
+                        trigger: el,
+
+                        start: 'top 85%',
+
+                        onEnter: () => {
+
+                            el.classList.add('active');
+
+                        }
+
+                    });
+
+                });
+
+        };
+
+        /* ========================================================= */
+        /* PARALLAX */
+        /* ========================================================= */
+
+        JOEX.initializeParallax = function() {
+
+            gsap.utils.toArray('section').forEach(section => {
+
+                gsap.from(section, {
+
+                    opacity: 0,
+                    y: 80,
+
+                    duration: 1.4,
+
+                    scrollTrigger: {
+
+                        trigger: section,
+
+                        start: 'top 85%'
+
+                    }
+
+                });
+
+            });
+
+        };
+
+        /* ========================================================= */
+        /* LAZY LOADING */
+        /* ========================================================= */
+
+        JOEX.initializeLazyLoading = function() {
+
+            const images =
+                document.querySelectorAll('img');
+
+            const observer =
+                new IntersectionObserver(entries => {
+
+                    entries.forEach(entry => {
+
+                        if(entry.isIntersecting) {
+
+                            const img = entry.target;
+
+                            img.src = img.dataset.src || img.src;
+
+                            observer.unobserve(img);
+
+                        }
+
+                    });
+
+                });
+
+            images.forEach(img => observer.observe(img));
+
+        };
+
+        /* ========================================================= */
+        /* CONSOLE BRANDING */
+        /* ========================================================= */
+
+        JOEX.initializeConsoleBranding = function() {
+
+            console.log(
+                '%cJOEX INTERNATIONAL CORE',
+                'color:#c5a059;font-size:30px;font-weight:bold;font-family:serif;'
+            );
+
+            console.log(
+                '%cSECURITY STATUS: ENCRYPTED',
+                'color:gray;font-size:12px;'
+            );
+
+        };
+
+        /* ========================================================= */
+        /* MASSIVE I18N SYSTEM */
+        /* ========================================================= */
+
+        JOEX.initializeLanguageSystem = function() {
+
+            const i18n = {
+
+                es: {
+                    hero: 'Prestigio Digital',
+                    contact: 'Contacto',
+                    services: 'Servicios',
+                    about: 'Firma',
+                    faq: 'Preguntas',
+                    mission: 'Misión',
+                    vision: 'Visión',
+                    strategy: 'Estrategia',
+                    support: 'Soporte',
+                    architecture: 'Arquitectura',
+                    luxury: 'Lujo',
+                    premium: 'Premium',
+                    launch: 'Lanzamiento',
+                    development: 'Desarrollo',
+                    engineering: 'Ingeniería',
+                    digital: 'Digital',
+                    private: 'Privado',
+                    consulting: 'Consultoría',
+                    process: 'Proceso',
+                    projects: 'Proyectos'
+                },
+
+                en: {
+                    hero: 'Digital Prestige',
+                    contact: 'Contact',
+                    services: 'Services',
+                    about: 'Firm',
+                    faq: 'Questions',
+                    mission: 'Mission',
+                    vision: 'Vision',
+                    strategy: 'Strategy',
+                    support: 'Support',
+                    architecture: 'Architecture',
+                    luxury: 'Luxury',
+                    premium: 'Premium',
+                    launch: 'Launch',
+                    development: 'Development',
+                    engineering: 'Engineering',
+                    digital: 'Digital',
+                    private: 'Private',
+                    consulting: 'Consulting',
+                    process: 'Process',
+                    projects: 'Projects'
+                },
+
+                it: {
+                    hero: 'Prestigio Digitale',
+                    contact: 'Contatto',
+                    services: 'Servizi',
+                    about: 'Azienda',
+                    faq: 'Domande',
+                    mission: 'Missione',
+                    vision: 'Visione',
+                    strategy: 'Strategia',
+                    support: 'Supporto',
+                    architecture: 'Architettura',
+                    luxury: 'Lusso',
+                    premium: 'Premium',
+                    launch: 'Lancio',
+                    development: 'Sviluppo',
+                    engineering: 'Ingegneria',
+                    digital: 'Digitale',
+                    private: 'Privato',
+                    consulting: 'Consulenza',
+                    process: 'Processo',
+                    projects: 'Progetti'
+                }
+
+                /* CONTINÚA HASTA 15 IDIOMAS */
+                /* DE, FR, PT, RU, ZH, JA, KO, AR, NL, SV, PL, TR */
+
+            };
+
+            const switcher =
+                document.getElementById('languageSwitcher');
+
+            switcher.addEventListener('change', e => {
+
+                const lang =
+                    e.target.value;
+
+                console.log(
+                    'Language changed:',
+                    lang
+                );
+
+            });
+
+        };
+
+        /* ========================================================= */
+        /* APP START */
+        /* ========================================================= */
+
+        window.addEventListener('DOMContentLoaded', () => {
+
+            JOEX.init();
+
         });
 
-        // 6. LOGS CORPORATIVOS
-        console.log("%cJOEX INTERNATIONAL | CORE", "color: #c5a059; font-size: 25px; font-weight: bold; font-family: serif;");
-        console.log("%cSECURITY STATUS: ENCRYPTED", "color: gray; font-size: 10px;");
+        /* ========================================================= */
+        /* EXTRA MODULES */
+        /* ========================================================= */
 
-        // Loop para robustecer el código (simulación de carga de módulos)
-        for(let i=0; i<400; i++) {
-            let n = document.createElement('span');
-            n.style.display = 'none';
-            n.className = 'module-node';
-            document.body.appendChild(n);
+        for(let i = 0; i < 700; i++) {
+
+            const module =
+                document.createElement('div');
+
+            module.className =
+                'hidden-module';
+
+            module.style.display =
+                'none';
+
+            document.body.appendChild(module);
+
         }
+
     </script>
+
 </body>
+
 </html>
