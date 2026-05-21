@@ -606,30 +606,52 @@
         /* IMAGE WRAPPER */
         /* ========================================================= */
 
-        .image-wrapper {
+ .image-wrapper img {
 
-            position: relative;
+    width: 100%;
+    height: 100%;
 
-            overflow: hidden;
+    object-fit: cover;
 
-        }
+    transition:
+        transform 1.5s ease,
+        filter 1.5s ease;
 
-        .image-wrapper img {
+    filter:
+        grayscale(100%);
 
-            width: 100%;
-            height: 100%;
+}
 
-            object-fit: cover;
+.image-wrapper:hover img {
 
-            transition:
-                transform 1.5s ease;
+    transform:
+        scale(1.05);
 
-        }
+    filter:
+        grayscale(0%);
 
-        .image-wrapper:hover img {
+}
 
-            transform:
-                scale(1.05);
+/* HERO BG */
+
+.hero-bg-image {
+
+    filter:
+        grayscale(100%);
+
+    transition:
+        2s ease;
+
+}
+
+.hero-bg-image:hover {
+
+    filter:
+        grayscale(0%);
+
+    transform:
+        scale(1.03);
+
 
         }
 
@@ -1007,26 +1029,27 @@
                 <!-- LANGUAGE -->
 
                 <select
-                    id="languageSwitcher"
-                    class="language-select">
+    id="languageSwitcher"
+    class="language-select">
 
-                    <option value="es">ES</option>
-                    <option value="en">EN</option>
-                    <option value="it">IT</option>
-                    <option value="de">DE</option>
-                    <option value="fr">FR</option>
-                    <option value="pt">PT</option>
-                    <option value="ru">RU</option>
-                    <option value="zh">ZH</option>
-                    <option value="ja">JA</option>
-                    <option value="ko">KO</option>
-                    <option value="ar">AR</option>
-                    <option value="nl">NL</option>
-                    <option value="sv">SV</option>
-                    <option value="pl">PL</option>
-                    <option value="tr">TR</option>
+    <option value="es">🇪🇸 ESP</option>
+    <option value="en">🇺🇸 ENG</option>
+    <option value="it">🇮🇹 ITA</option>
+    <option value="de">🇩🇪 GER</option>
+    <option value="fr">🇫🇷 FRA</option>
+    <option value="pt">🇵🇹 POR</option>
+    <option value="ru">🇷🇺 RUS</option>
+    <option value="zh">🇨🇳 CHN</option>
+    <option value="ja">🇯🇵 JPN</option>
+    <option value="ko">🇰🇷 KOR</option>
+    <option value="ar">🇸🇦 ARA</option>
+    <option value="nl">🇳🇱 NLD</option>
+    <option value="sv">🇸🇪 SWE</option>
+    <option value="pl">🇵🇱 POL</option>
+    <option value="tr">🇹🇷 TUR</option>
 
-                </select>
+</select>
+
 
                 <!-- CTA -->
 
@@ -1058,83 +1081,126 @@
     <!-- ========================================================= -->
 
     <section
-        class="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
+    class="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
 
-        <div class="hero-gradient"></div>
+    <!-- OVERLAY -->
+
+    <div
+        class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black z-[1]"></div>
+
+    <!-- VIDEO / IMAGE BACKGROUND -->
+
+    <div
+        class="absolute inset-0 z-0 overflow-hidden">
+
+        <img
+            loading="lazy"
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=2070"
+            alt="Luxury Background"
+            class="w-full h-full object-cover scale-110 opacity-40 hero-bg-image">
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div
+        class="max-w-[1700px] mx-auto relative z-10 text-center">
+
+        <!-- TOP TAG -->
 
         <div
-            class="max-w-[1500px] mx-auto text-center relative z-10">
+            id="heroTag"
+            class="mb-10 text-[10px] md:text-xs uppercase tracking-[1em] text-gold opacity-100">
 
-            <!-- HERO TAG -->
-
-            <div
-                id="heroTag"
-                class="mb-14 text-[10px] tracking-[1em] uppercase text-gold opacity-0">
-
-                ESTABLISHED IN MEDELLÍN • GLOBAL DIGITAL ENGINEERING
-
-            </div>
-
-            <!-- HERO TITLE -->
-
-            <h1
-                id="heroTitle"
-                class="hero-title text-[13vw] md:text-[8vw] font-black opacity-0">
-
-                DIGITAL <br>
-
-                <span class="text-gold">
-                    PRESTIGE
-                </span>
-
-            </h1>
-
-            <!-- DIVIDER -->
-
-            <div
-                class="w-32 h-[1px] bg-gold mx-auto my-16"></div>
-
-            <!-- HERO DESCRIPTION -->
-
-            <p
-                id="heroDescription"
-                class="max-w-5xl mx-auto text-xl md:text-2xl text-gray-400 leading-relaxed opacity-0">
-
-                JOEX Agencia Digital desarrolla ecosistemas digitales de élite,
-                arquitectura premium y experiencias corporativas inmersivas
-                para compañías que exigen excelencia absoluta.
-
-            </p>
-
-            <!-- BUTTONS -->
-
-            <div
-                id="heroButtons"
-                class="flex flex-col md:flex-row items-center justify-center gap-10 mt-20 opacity-0">
-
-                <a
-                    href="#services"
-                    class="btn-luxury">
-
-                    Explorar Servicios
-
-                </a>
-
-                <a
-                    href="https://wa.me/573184499437"
-                    class="uppercase text-[10px] tracking-[0.6em] text-gray-400 flex items-center gap-6 hover:text-gold transition">
-
-                    Agendar Consultoría
-
-                    <i class="fa-solid fa-arrow-right-long"></i>
-
-                </a>
-
-            </div>
+            JOEX INTERNATIONAL DIGITAL AGENCY
 
         </div>
 
-    </section>
+        <!-- MAIN TITLE -->
+
+        <h1
+            id="heroTitle"
+            class="hero-title luxury-font text-[16vw] md:text-[9vw] leading-[0.9] font-black opacity-100">
+
+            WE BUILD <br>
+
+            <span class="text-gold">
+                DIGITAL
+            </span>
+
+            <br>
+
+            LEGACY
+
+        </h1>
+
+        <!-- DESCRIPTION -->
+
+        <p
+            id="heroDescription"
+            class="max-w-4xl mx-auto mt-14 text-white text-lg md:text-2xl leading-relaxed font-light opacity-100">
+
+            Arquitectura digital de lujo,
+            branding internacional,
+            ingeniería web premium
+            y experiencias corporativas inmersivas
+            para compañías de alto nivel.
+
+        </p>
+
+        <!-- BUTTONS -->
+
+        <div
+            id="heroButtons"
+            class="flex flex-col md:flex-row justify-center items-center gap-10 mt-20 opacity-100">
+
+            <!-- PORTAFOLIO -->
+
+            <a
+                href="https://2123s1xdaaqsdfh.github.io/Portafoly/"
+                target="_blank"
+                class="btn-luxury">
+
+                Ver Portafolio
+
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+            </a>
+
+            <!-- WHATSAPP -->
+
+            <a
+                href="https://wa.me/573184499437"
+                class="uppercase text-[11px] tracking-[0.5em] text-white flex items-center gap-5 hover:text-gold transition-all duration-700">
+
+                Solicitar Consultoría
+
+                <i class="fa-solid fa-arrow-right-long"></i>
+
+            </a>
+
+        </div>
+
+        <!-- SCROLL INDICATOR -->
+
+        <div
+            class="absolute left-1/2 -translate-x-1/2 bottom-[-140px] flex flex-col items-center gap-4">
+
+            <div
+                class="uppercase text-[9px] tracking-[0.5em] text-gray-400">
+
+                Scroll
+
+            </div>
+
+            <div
+                class="w-[1px] h-20 bg-gradient-to-b from-gold to-transparent"></div>
+
+        </div>
+
+    </div>
+
+</section>
 
     <!-- ========================================================= -->
     <!-- ABOUT -->
@@ -1195,7 +1261,7 @@
                             </div>
 
                             <p
-                                class="text-gray-500 text-sm leading-relaxed">
+                               class="text-white/80" text-sm leading-relaxed">
 
                                 Liderar la transformación digital premium
                                 en mercados internacionales.
@@ -1214,7 +1280,7 @@
                             </div>
 
                             <p
-                                class="text-gray-500 text-sm leading-relaxed">
+                               class="text-white/80" text-sm leading-relaxed">
 
                                 Precisión técnica, estética atemporal y
                                 resultados medibles.
@@ -1302,7 +1368,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 text-lg leading-relaxed mb-10">
+                        class="text-white/80" text-lg leading-relaxed mb-10">
 
                         Infraestructuras digitales robustas,
                         optimizadas para velocidad,
@@ -1342,7 +1408,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 text-lg leading-relaxed mb-10">
+                        class="text-white/80" text-lg leading-relaxed mb-10">
 
                         Interfaces visuales inmersivas,
                         microinteracciones de lujo y
@@ -1382,7 +1448,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 text-lg leading-relaxed mb-10">
+                       class="text-white/80" text-lg leading-relaxed mb-10">
 
                         Posicionamiento orgánico de alto nivel
                         orientado a mercados premium
@@ -1427,7 +1493,7 @@
                     class="text-center xl:text-left">
 
                     <div class="stat-number">
-                        14
+                        5
                     </div>
 
                     <div
@@ -1607,7 +1673,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-relaxed">
+                       class="text-white/80" leading-relaxed">
 
                         Evaluación estratégica de la marca,
                         objetivos corporativos y estructura digital.
@@ -1636,7 +1702,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-relaxed">
+                       class="text-white/80" leading-relaxed">
 
                         Diseño de experiencia premium,
                         estructura UX y arquitectura técnica avanzada.
@@ -1665,7 +1731,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-relaxed">
+                        class="text-white/80" leading-relaxed">
 
                         Ingeniería frontend/backend,
                         optimización y seguridad empresarial.
@@ -1694,7 +1760,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-relaxed">
+                        class="text-white/80" leading-relaxed">
 
                         Despliegue global,
                         mantenimiento concierge y escalabilidad.
@@ -1756,7 +1822,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-loose">
+                       class="text-white/80" leading-loose">
 
                         Cada plataforma se desarrolla desde cero.
                         JOEX no utiliza plantillas genéricas ni estructuras repetidas.
@@ -1777,7 +1843,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-loose">
+                       class="text-white/80" leading-loose">
 
                         Utilizamos stacks modernos,
                         arquitectura cloud,
@@ -1799,7 +1865,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-loose">
+                       class="text-white/80" leading-loose">
 
                         Sí.
                         JOEX desarrolla proyectos para clientes internacionales
@@ -1821,7 +1887,7 @@
                     </h3>
 
                     <p
-                        class="text-gray-500 leading-loose">
+                       class="text-white/80" leading-loose">
 
                         Ofrecemos soporte concierge 24/7,
                         monitoreo y mantenimiento corporativo continuo.
@@ -2025,7 +2091,7 @@
                     class="text-center lg:text-right">
 
                     <div
-                        class="text-gray-500 text-sm mb-3">
+                        class="text-white/80" text-sm mb-3">
 
                         joexagenciadigital@gmail.com
 
@@ -2047,7 +2113,7 @@
             <div
                 class="border-t border-white/5 mt-20 pt-10 text-center text-[10px] uppercase tracking-[0.5em] text-gray-700">
 
-                JOEX International Firm © 2026 • Digital Sovereignty
+                JOEX AGENCIA DIGITAL © 2026 • TODOS LOS DERECHOS RESEVADOS
 
             </div>
 
@@ -2351,45 +2417,86 @@
         /* GSAP */
         /* ========================================================= */
 
-        JOEX.initializeGSAP = function() {
+       JOEX.initializeGSAP = function() {
 
-            gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-            const timeline =
-                gsap.timeline();
+    gsap.set(
+        [
+            '#heroTag',
+            '#heroTitle',
+            '#heroDescription',
+            '#heroButtons'
+        ],
+        {
+            opacity: 1,
+            y: 0
+        }
+    );
 
-            timeline
+    const timeline =
+        gsap.timeline();
 
-                .to('#heroTag', {
+    timeline
 
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.2
+        .from('#heroTag', {
 
-                })
+            opacity: 0,
+            y: 40,
 
-                .to('#heroTitle', {
+            duration: 1.2,
 
-                    opacity: 1,
-                    duration: 1.6
+            ease: 'power4.out'
 
-                }, '-=0.6')
+        })
 
-                .to('#heroDescription', {
+        .from('#heroTitle', {
 
-                    opacity: 1,
-                    duration: 1.2
+            opacity: 0,
+            y: 80,
 
-                }, '-=0.8')
+            duration: 1.5,
 
-                .to('#heroButtons', {
+            ease: 'power4.out'
 
-                    opacity: 1,
-                    duration: 1
+        }, '-=0.8')
 
-                }, '-=0.6');
+        .from('#heroDescription', {
 
-        };
+            opacity: 0,
+            y: 40,
+
+            duration: 1.2,
+
+            ease: 'power4.out'
+
+        }, '-=0.9')
+
+        .from('#heroButtons', {
+
+            opacity: 0,
+            y: 30,
+
+            duration: 1,
+
+            ease: 'power4.out'
+
+        }, '-=0.8');
+gsap.to('.hero-bg-image', {
+
+    scale: 1.08,
+
+    duration: 6,
+
+    repeat: -1,
+
+    yoyo: true,
+
+    ease: 'sine.inOut'
+
+});
+};
+
 
         /* ========================================================= */
         /* NAVBAR */
